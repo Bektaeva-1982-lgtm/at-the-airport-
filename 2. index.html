@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Airport Talk – practise English</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#3B3A9B; --blue-d:#2A2977; --milk:#F5F2FF; --line:#D9D4F2;
+  --caramel:#C98B4E; --mint:#1FA97C; --mint-l:#D5F4E7;
+  --pink:#E8486F; --pink-l:#FFDFE6; --butter:#FFD25A; --butter-l:#FFF0BE;
+  --ink:#221F4B; --soft:#6B678F;
+  --display:'Fredoka','Trebuchet MS',system-ui,sans-serif;
+  --body:'Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--milk);color:var(--ink);font:400 1.125rem/1.5 var(--body);min-height:100vh;display:flex;flex-direction:column}
+button,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:8px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px clamp(16px,4vw,40px)}
+.brand{display:flex;align-items:center;gap:10px;font:600 1.6rem var(--display);color:var(--blue)}
+.brand svg{width:38px;height:38px}
+.link{background:none;border:0;padding:6px 8px;color:var(--blue);text-decoration:underline;text-underline-offset:3px;font-weight:700}
+main{flex:1;width:100%;max-width:1040px;margin:0 auto;padding:8px clamp(16px,4vw,40px) 40px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:3px solid var(--blue);background:var(--blue);color:#fff;border-radius:999px;padding:12px 26px;font:600 1.25rem var(--display);box-shadow:0 5px 0 var(--blue-d);transition:transform .08s,box-shadow .08s;position:relative;overflow:hidden}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--blue-d)}
+.btn.ghost{background:#fff;color:var(--blue)}
+.btn.small{padding:8px 18px;font-size:1.05rem}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn svg{width:24px;height:24px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;padding-top:12px}
+.hero h1{font-size:clamp(2.2rem,5.5vw,3.4rem);font-weight:700;color:var(--blue);margin-bottom:14px}
+.hero p.lead{font-size:1.25rem;max-width:34ch;margin:0 0 24px}
+.notice{background:var(--butter-l);border:2px solid var(--butter);border-radius:14px;padding:10px 14px;margin:0 0 16px;font-size:1rem}
+.steps-preview{background:#fff;border:3px solid var(--line);border-radius:28px;padding:22px;display:grid;gap:12px}
+.steps-preview div.row{display:flex;align-items:center;gap:12px;font-weight:600}
+.num-badge{background:var(--blue);color:#fff;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font:700 1rem var(--display);flex:none}
+.bar{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;margin-bottom:18px}
+.dots{display:flex;gap:6px;flex-wrap:wrap}
+.dots i{width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--line)}
+.dots i.now{border-color:var(--blue);background:var(--butter);transform:scale(1.3)}
+.dots i.good{background:var(--mint);border-color:var(--mint)}
+.dots i.ok{background:var(--butter);border-color:var(--caramel)}
+.dots i.low{background:var(--pink);border-color:var(--pink)}
+.dots i.skip{background:var(--line)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip,.tools select{background:#fff;border:2px solid var(--line);border-radius:999px;padding:6px 14px;font-size:1rem;display:inline-flex;align-items:center;gap:8px}
+.chip[aria-pressed="true"]{background:var(--butter-l);border-color:var(--caramel)}
+.tools select{max-width:170px}
+.stage{background:#fff;border:3px solid var(--line);border-radius:32px;padding:clamp(18px,4vw,36px);display:grid;gap:18px;justify-items:center;text-align:center}
+.stage h2{font-size:1.7rem;color:var(--blue);margin-bottom:2px}
+.stage .sub{color:var(--soft);margin:0;font-size:1.05rem}
+.pic-card{background:var(--milk);border:3px solid var(--line);border-radius:24px;padding:16px;max-width:420px;width:100%}
+.pic-card .imgbox{width:100%;aspect-ratio:3/2;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#d8d2f0,#ece8ff);display:grid;place-items:center;font-size:5rem}
+.pic-card img{width:100%;height:100%;object-fit:cover;display:block}
+.pic-card .caption{font:600 1.6rem var(--display);color:var(--blue);margin-top:10px;text-align:center}
+.pic-card .trans{color:var(--soft);font-size:1rem;text-align:center}
+.tiles{display:flex;flex-wrap:wrap;gap:10px 8px;justify-content:center}
+.tile{font:600 clamp(1.4rem,4.2vw,2.1rem) var(--display);background:#fff;color:var(--ink);border:3px solid var(--blue);border-radius:16px;padding:5px 13px;box-shadow:0 4px 0 var(--blue);transition:background .2s,transform .1s}
+.tile.say{background:var(--butter);transform:translateY(-4px)}
+.tile.good{background:var(--mint-l);border-color:var(--mint);box-shadow:0 4px 0 var(--mint)}
+.tile.close{background:var(--butter-l);border-color:var(--caramel);box-shadow:0 4px 0 var(--caramel)}
+.tile.bad{background:var(--pink-l);border-color:var(--pink);box-shadow:0 4px 0 var(--pink)}
+.controls{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:center;margin-top:6px}
+.mic{width:104px;height:104px;border-radius:50%;border:4px solid var(--blue-d);background:var(--blue);color:#fff;display:grid;place-items:center;align-content:center;font:600 1rem var(--display);box-shadow:0 6px 0 var(--blue-d);position:relative;gap:2px}
+.mic svg{width:36px;height:36px}
+.mic:active{transform:translateY(4px);box-shadow:0 2px 0 var(--blue-d)}
+.mic.rec{background:var(--pink);border-color:#A72447;box-shadow:0 6px 0 #A72447}
+.mic.rec::after{content:'';position:absolute;inset:-12px;border-radius:50%;border:4px solid var(--pink);opacity:.6;animation:ping 1.2s ease-out infinite}
+.mic[disabled]{opacity:.45;cursor:not-allowed}
+@keyframes ping{from{transform:scale(.85);opacity:.7}to{transform:scale(1.2);opacity:0}}
+.hint{margin:0;min-height:1.6em;font-weight:700;color:var(--blue);text-align:center}
+.heard{margin:0;color:var(--soft);text-align:center}
+.feedback{margin-top:20px;background:#fff;border:3px solid var(--blue);border-radius:32px;padding:clamp(18px,4vw,30px);display:grid;gap:16px;justify-items:center;text-align:center}
+.scorebox{display:flex;align-items:center;gap:22px;flex-wrap:wrap;justify-content:center}
+.cup{width:130px;height:auto}
+.cupfill{transform:translateY(76px);transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.num{font:700 4rem/1 var(--display);color:var(--blue)}
+.num small{font-size:1.2rem;color:var(--soft);font-weight:500}
+.stars{display:flex;gap:4px}
+.star{width:32px;height:32px;fill:#E7E3F7}
+.star.on{fill:var(--butter);stroke:var(--caramel);stroke-width:1.2;stroke-linejoin:round}
+.msg{font:600 1.5rem var(--display)}
+.tips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center}
+.tips button{background:var(--pink-l);border:2px solid var(--pink);border-radius:999px;padding:4px 14px;font-weight:700}
+.actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.next.counting::after{content:'';position:absolute;left:0;bottom:0;height:6px;background:var(--butter);animation:fill 3s linear forwards}
+@keyframes fill{from{width:0}to{width:100%}}
+.chat{width:100%;display:grid;gap:12px;margin-bottom:6px;text-align:left}
+.bubble{display:inline-block;max-width:90%;border-radius:20px;padding:10px 16px;font-size:1.05rem}
+.bubble b{font-family:var(--display);font-weight:600;margin-right:6px}
+.bubble.agent{background:var(--milk);border:2px solid var(--line);border-bottom-left-radius:6px;justify-self:start}
+.bubble.traveller{background:var(--blue);color:#fff;border-bottom-right-radius:6px;justify-self:end}
+.res{display:grid;gap:22px;justify-items:center;text-align:center}
+.res h2{font-size:clamp(2rem,5vw,3rem);color:var(--blue)}
+.list{list-style:none;margin:0;padding:0;width:100%;display:grid;gap:8px;text-align:left}
+.list li{display:grid;grid-template-columns:auto 1fr auto auto;gap:12px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:16px;padding:8px 12px}
+.list .sc{display:flex;align-items:center;gap:6px;font-weight:700}
+.list .star{width:20px;height:20px}
+.mini{width:40px;height:40px;border-radius:50%;border:2px solid var(--blue);background:#fff;color:var(--blue);display:grid;place-items:center;padding:0}
+.mini svg{width:20px;height:20px}
+footer{padding:18px clamp(16px,4vw,40px) 26px;color:var(--soft);font-size:.95rem;text-align:center}
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr}
+  .hero p.lead{max-width:none}
+  .list li{grid-template-columns:auto 1fr auto}
+  .list li .mini{grid-column:3;grid-row:1}
+  .list li .sc{grid-column:2;grid-row:2}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <svg viewBox="0 0 140 120" aria-hidden="true"><path d="M18 28H98V66C98 88 82 104 58 104C34 104 18 88 18 66Z" fill="#FFD25A" stroke="#3B3A9B" stroke-width="7"/><path d="M98 42H108a14 14 0 0 1 0 28H96" fill="none" stroke="#3B3A9B" stroke-width="7"/></svg>
+    Airport Talk
+  </div>
+  <button id="menuBtn" class="link" hidden>← Back to menu</button>
+</header>
+
+<main>
+  <!-- START -->
+  <section id="start" class="hero" aria-labelledby="h1">
+    <div>
+      <h1 id="h1">Learn English for the airport</h1>
+      <p class="lead">Three steps: learn the words, practise key phrases, then act out a full check‑in dialogue — and get scored on your pronunciation.</p>
+      <div id="noSR" class="notice" hidden>Your browser can't listen to your voice. Please use Chrome, Edge or Safari to get scores. You can still listen to all the audio.</div>
+      <div class="steps-preview" style="margin-bottom:24px">
+        <div class="row"><span class="num-badge">1</span> Airport words — look, listen, repeat</div>
+        <div class="row"><span class="num-badge">2</span> Useful phrases — listen first, then say</div>
+        <div class="row"><span class="num-badge">3</span> Full dialogue — you are the traveller</div>
+      </div>
+      <button id="startBtn" class="btn">Start lesson</button>
+    </div>
+    <div class="steps-preview" aria-hidden="true">
+      <div style="font-size:2.4rem;text-align:center">🛫</div>
+      <div class="row" style="color:var(--soft);justify-content:center">Check‑in · Boarding · On board</div>
+      <div class="chat">
+        <span class="bubble agent"><b>Agent</b>Can I see your ticket, please?</span>
+        <span class="bubble traveller"><b>You</b>Here you are.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRACTICE -->
+  <section id="practice" hidden aria-label="Practice">
+    <div class="bar">
+      <div id="dots" class="dots" aria-hidden="true"></div>
+      <div class="tools">
+        <button id="slowBtn" class="chip" aria-pressed="false">🐢 Slow voice</button>
+        <label class="chip"><input type="checkbox" id="autoNext" checked> Next automatically</label>
+        <select id="voiceSel" aria-label="Choose a voice"></select>
+      </div>
+    </div>
+
+    <div class="stage" id="stage"></div>
+
+    <p id="hint" class="hint" aria-live="polite" style="margin-top:12px"></p>
+    <p id="heard" class="heard" hidden style="margin-top:6px"></p>
+    <div style="display:flex;justify-content:center;gap:14px;margin-top:10px">
+      <button id="helpBtn" class="link" hidden>🆘 Help me</button>
+      <button id="skipBtn" class="link">Skip this one</button>
+    </div>
+
+    <div id="feedback" class="feedback" hidden aria-live="polite">
+      <div class="scorebox">
+        <div id="cupWrap"></div>
+        <div>
+          <div class="num"><span id="scoreNum">0</span><small> / 100</small></div>
+          <div id="scoreStars" class="stars" role="img"></div>
+        </div>
+      </div>
+      <div id="msg" class="msg"></div>
+      <div id="tips" class="tips" hidden></div>
+      <div class="actions">
+        <button id="retryBtn" class="btn ghost">Try again</button>
+        <button id="nextBtn" class="btn next">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results" class="res" hidden aria-live="polite">
+    <h2>Lesson complete! ✈️</h2>
+    <div class="scorebox">
+      <div id="cupWrap2"></div>
+      <div>
+        <div class="num"><span id="avgNum">0</span><small> / 100</small></div>
+        <div id="avgStars" class="stars" role="img"></div>
+      </div>
+    </div>
+    <ul id="list" class="list"></ul>
+    <div class="actions">
+      <button id="tricky" class="btn ghost" hidden>Practise tricky items</button>
+      <button id="again" class="btn">Play again</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Free and open source (MIT). Scores come from your browser's speech recognition, so they are a friendly guide, not an exam.
+</footer>
+
+<script>
+'use strict';
+
+/* ============ LESSON DATA ============ */
+// Step 1 – vocabulary. `img` can be a URL; if empty, `emoji` is shown.
+const VOCAB = [
+  { word:"check-in desk",        trans:"stanowisko odprawy",   img:"", emoji:"🛂" },
+  { word:"airport trolley",      trans:"wózek na kółkach",     img:"", emoji:"🛒" },
+  { word:"departure lounge",     trans:"hala odlotów",         img:"", emoji:"🛋️" },
+  { word:"cockpit",              trans:"kokpit",               img:"", emoji:"🛩️" },
+  { word:"flight attendant",     trans:"steward / stewardesa", img:"", emoji:"👩‍✈️" },
+  { word:"aisle",                trans:"przejście",            img:"", emoji:"🚶" },
+  { word:"seatbelt",             trans:"pas bezpieczeństwa",   img:"", emoji:"🔗" },
+  { word:"tray table",           trans:"taca",                 img:"", emoji:"🍽️" },
+  { word:"overhead compartment", trans:"schowek nad głową",    img:"", emoji:"🧳" },
+  { word:"baggage carousel",     trans:"taśma bagażowa",       img:"", emoji:"🎠" },
+  { word:"customs",              trans:"odprawa celna",        img:"", emoji:"🛃" },
+  { word:"arrival hall",         trans:"hala przylotów",       img:"", emoji:"🛬" }
+];
+
+// Step 2 – useful phrases (text hidden until Help is pressed).
+const PHRASES = [
+  "Can I see your ticket, please?",
+  "Here is my e-ticket.",
+  "How much luggage do you have?",
+  "Could I take it as my hand luggage?",
+  "I'm afraid it is too big.",
+  "Here is your boarding pass.",
+  "You'll need to show it again at the gate.",
+  "Could you put your luggage on the belt?",
+  "The plane is boarding in forty minutes.",
+  "Have a nice flight."
+];
+
+// Step 3 – role-play. 'agent' = computer, 'traveller' = learner.
+const ROLEPLAY = [
+  { who:"agent",     text:"Good morning. Can I see your passport and ticket, please?" },
+  { who:"traveller", text:"Good morning. Here you are." },
+  { who:"agent",     text:"Thank you. How many bags are you checking in?" },
+  { who:"traveller", text:"Just one suitcase." },
+  { who:"agent",     text:"Would you like an aisle or a window seat?" },
+  { who:"traveller", text:"A window seat, please." },
+  { who:"agent",     text:"Here is your boarding pass. You'll be boarding at Gate three." },
+  { who:"traveller", text:"Thank you very much." },
+  { who:"agent",     text:"Have a nice flight!" }
+];
+
+const PASS = 70;
+const AUTO_DELAY = 3000;
+
+/* ============ HELPERS ============ */
+const $  = s => document.querySelector(s);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const synth = window.speechSynthesis || null;
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+const NAME = { agent:'Agent', traveller:'You' };
+
+const state = { items:[], i:0, scores:{}, slow:false, starts:[] };
+let rec=null, recording=false, recTimer=null, autoTimer=null, playToken=0;
+
+/* ---------- text matching ---------- */
+const ONES=['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen'];
+const TENS=['','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety'];
+const numWords=n=>n<20?ONES[n]:n<100?TENS[Math.floor(n/10)]+(n%10?' '+ONES[n%10]:''):String(n);
+const CONTR={"i'm":['i','am'],"i'll":['i','will'],"i'd":['i','would'],"i've":['i','have'],"that's":['that','is'],"it's":['it','is'],"here's":['here','is'],"you're":['you','are'],"we'll":['we','will'],"let's":['let','us'],"can't":['can','not'],"don't":['do','not'],"won't":['will','not'],"you'll":['you','will']};
+function norm(str){
+  let s=str.toLowerCase().replace(/[’‘`]/g,"'");
+  s=s.replace(/\b\d+\b/g,m=>numWords(+m));
+  s=s.replace(/[^a-z' ]+/g,' ');
+  const out=[];
+  for(let t of s.split(/\s+/)){
+    t=t.replace(/^'+|'+$/g,'');
+    if(!t) continue;
+    if(CONTR[t]) out.push(...CONTR[t]); else out.push(t);
+  }
+  return out;
+}
+function lev(a,b){
+  const m=a.length,n=b.length;
+  if(!m)return n; if(!n)return m;
+  let prev=Array.from({length:n+1},(_,j)=>j);
+  for(let i=1;i<=m;i++){
+    const cur=[i];
+    for(let j=1;j<=n;j++)
+      cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a[i-1]===b[j-1]?0:1));
+    prev=cur;
+  }
+  return prev[n];
+}
+function tokScore(a,b){
+  if(a===b) return 1;
+  const sim=1-lev(a,b)/Math.max(a.length,b.length);
+  return (sim>=0.72 && Math.min(a.length,b.length)>2)?0.6:0;
+}
+function align(target,said){
+  const n=target.length,m=said.length;
+  const dp=Array.from({length:n+1},()=>new Array(m+1).fill(0));
+  for(let i=1;i<=n;i++)for(let j=1;j<=m;j++){
+    const sc=tokScore(target[i-1].tok,said[j-1]);
+    dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1],sc>0?dp[i-1][j-1]+sc:0);
+  }
+  const scores=new Array(n).fill(0);
+  let i=n,j=m,used=0;
+  while(i>0&&j>0){
+    const sc=tokScore(target[i-1].tok,said[j-1]);
+    if(sc>0&&dp[i][j]===dp[i-1][j-1]+sc){scores[i-1]=sc;used++;i--;j--;}
+    else if(dp[i-1][j]>=dp[i][j-1]) i--;
+    else j--;
+  }
+  return {scores,extras:m-used};
+}
+function evaluate(text,alts){
+  const words=text.split(' ');
+  const target=[];
+  words.forEach((w,ti)=>norm(w).forEach(tok=>target.push({tok,tile:ti})));
+  let best=null;
+  for(const a of alts){
+    const said=norm(a.transcript);
+    const {scores,extras}=align(target,said);
+    const base=target.length?scores.reduce((x,y)=>x+y,0)/target.length:0;
+    const penalty=1-Math.min(0.3,extras*0.05);
+    const conf=a.confidence>0?a.confidence:1;
+    const final=Math.round(100*base*penalty*(0.85+0.15*conf));
+    if(!best||final>best.score) best={score:final,scores,transcript:a.transcript};
+  }
+  const tiles=words.map((w,ti)=>{
+    const idx=target.map((t,k)=>t.tile===ti?k:-1).filter(k=>k>=0);
+    if(!idx.length) return 'good';
+    const avg=idx.reduce((x,k)=>x+best.scores[k],0)/idx.length;
+    return avg>=0.95?'good':avg>=0.5?'close':'bad';
+  });
+  return {score:best.score,tiles,transcript:best.transcript,words};
+}
+
+/* ---------- speech synthesis ---------- */
+let voices=[];
+function loadVoices(){
+  if(!synth) return;
+  voices=synth.getVoices().filter(v=>/^en([-_]|$)/i.test(v.lang));
+  const sel=$('#voiceSel'), prev=sel.value;
+  sel.innerHTML='';
+  voices.forEach(v=>{const o=document.createElement('option');o.value=v.voiceURI;o.textContent=v.name;sel.appendChild(o);});
+  const pref=voices.find(v=>v.voiceURI===prev)
+    ||voices.find(v=>/en[-_]US/i.test(v.lang)&&/natural|google|samantha|aria|jenny/i.test(v.name))
+    ||voices.find(v=>/en[-_]US/i.test(v.lang))||voices[0];
+  if(pref) sel.value=pref.voiceURI;
+  sel.hidden=!voices.length;
+}
+if(synth){ loadVoices(); synth.onvoiceschanged=loadVoices; }
+
+function speak(text,{who='agent',slow=false,onWord}={}){
+  return new Promise(resolve=>{
+    if(!synth){ resolve(); return; }
+    const u=new SpeechSynthesisUtterance(text);
+    const v=voices.find(x=>x.voiceURI===$('#voiceSel').value);
+    if(v){u.voice=v;u.lang=v.lang;} else u.lang='en-US';
+    u.rate=(slow||state.slow)?0.6:0.9;
+    u.pitch=who==='traveller'?1.2:0.95;
+    if(onWord) u.onboundary=e=>{if(!e.name||e.name==='word') onWord(e.charIndex);};
+    u.onend=u.onerror=()=>resolve();
+    synth.speak(u);
+  });
+}
+function stopSpeaking(){ playToken++; if(synth) synth.cancel(); clearHighlight(); }
+
+/* ---------- UI ---------- */
+const setHint=t=>{ $('#hint').textContent=t; };
+const starOn=on=>`<svg class="star ${on?'on':''}" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg>`;
+const starCount=s=>s>=90?3:s>=70?2:s>=40?1:0;
+const starsHTML=n=>[0,1,2].map(k=>starOn(k<n)).join('');
+let cupId=0;
+function cupHTML(){
+  const id='cc'+(++cupId);
+  return `<svg class="cup" viewBox="0 0 140 120" aria-hidden="true">
+    <clipPath id="${id}"><path d="M18 28H98V66C98 88 82 104 58 104C34 104 18 88 18 66Z"/></clipPath>
+    <path d="M18 28H98V66C98 88 82 104 58 104C34 104 18 88 18 66Z" fill="#fff"/>
+    <g clip-path="url(#${id})"><rect class="cupfill" x="14" y="28" width="90" height="80" fill="#C98B4E"/></g>
+    <path d="M18 28H98V66C98 88 82 104 58 104C34 104 18 88 18 66Z" fill="none" stroke="#3B3A9B" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M98 42H108a14 14 0 0 1 0 28H96" fill="none" stroke="#3B3A9B" stroke-width="6" stroke-linecap="round"/>
+    <ellipse cx="58" cy="112" rx="46" ry="5" fill="#3B3A9B"/></svg>`;
+}
+function setCup(wrap,score){
+  const f=wrap.querySelector('.cupfill');
+  f.style.transform='translateY(76px)';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{ f.style.transform=`translateY(${76*(1-score/100)}px)`; }));
+}
+function show(id){
+  ['start','practice','results'].forEach(s=>$('#'+s).hidden=s!==id);
+  $('#menuBtn').hidden=id==='start';
+  window.scrollTo(0,0);
+}
+function clearHighlight(){ document.querySelectorAll('.tile.say').forEach(t=>t.classList.remove('say')); }
+function highlight(charIndex){
+  let idx=0;
+  state.starts.forEach((st,k)=>{ if(st<=charIndex) idx=k; });
+  clearHighlight();
+  const box=$('#tiles');
+  if(box&&box.children[idx]) box.children[idx].classList.add('say');
+}
+function clearAuto(){ clearTimeout(autoTimer); autoTimer=null; const b=$('#nextBtn'); if(b) b.classList.remove('counting'); }
+
+/* ============ BUILD ITEMS ============ */
+function buildItems(){
+  const items=[];
+  VOCAB.forEach((v,k)=>items.push({stage:1,key:'v'+k,type:'vocab',text:v.word,trans:v.trans,img:v.img,emoji:v.emoji}));
+  PHRASES.forEach((p,k)=>items.push({stage:2,key:'p'+k,type:'phrase',text:p}));
+  ROLEPLAY.forEach((r,k)=>{
+    if(r.who!=='traveller') return;
+    let prompt=null;
+    for(let j=k-1;j>=0;j--){ if(ROLEPLAY[j].who==='agent'){ prompt=ROLEPLAY[j].text; break; } }
+    items.push({stage:3,key:'r'+k,type:'roleplay',text:r.text,prompt});
+  });
+  return items;
+}
+
+/* ============ SESSION ============ */
+function startLesson(items){
+  state.items=items||buildItems();
+  state.i=0; state.scores={};
+  show('practice');
+  renderItem();
+}
+
+function renderItem(){
+  clearAuto(); stopAll();
+  const it=state.items[state.i];
+  // dots
+  $('#dots').innerHTML=state.items.map((x,k)=>{
+    const sc=state.scores[x.key];
+    let c='';
+    if(k===state.i) c='now';
+    else if(sc===null) c='skip';
+    else if(sc!==undefined) c=sc>=70?'good':sc>=40?'ok':'low';
+    return `<i class="${c}"></i>`;
+  }).join('');
+  // stage
+  const stage=$('#stage'); stage.innerHTML='';
+  $('#feedback').hidden=true; $('#heard').hidden=true;
+  $('#micBtn').disabled=!SR;
+  $('#helpBtn').hidden=true;
+
+  if(it.type==='vocab') renderVocab(it);
+  else if(it.type==='phrase') renderPhrase(it);
+  else renderRoleplay(it);
+
+  $('#micBtn').disabled=!SR;
+}
+
+/* --- STEP 1: vocabulary --- */
+function renderVocab(it){
+  const stage=$('#stage');
+  stage.innerHTML=`
+    <h2>Look, listen, and repeat</h2>
+    <p class="sub">Say the word clearly. You'll get a score.</p>
+    <div class="pic-card">
+      <div class="imgbox" id="imgbox"></div>
+      <div class="caption" id="cap"></div>
+      <div class="trans" id="tr"></div>
+    </div>
+    <div class="tiles" id="tiles"></div>
+    <div class="controls" id="controls"></div>`;
+  const box=$('#imgbox');
+  if(it.img){ box.innerHTML=`<img src="${it.img}" alt="">`; } else { box.textContent=it.emoji; }
+  $('#cap').textContent=it.word;
+  $('#tr').textContent=it.trans;
+  // single word tile
+  const words=it.text.split(' ');
+  state.starts=words.map((w,ix)=>words.slice(0,ix).join(' ').length+(ix?1:0));
+  const tiles=$('#tiles'); tiles.innerHTML='';
+  words.forEach(w=>{ const b=document.createElement('button'); b.className='tile'; b.textContent=w; b.onclick=()=>{stopAll();speak(w,{slow:true});}; tiles.appendChild(b); });
+  // controls: listen + mic
+  $('#controls').innerHTML='';
+  const listen=document.createElement('button'); listen.className='btn ghost'; listen.innerHTML='🔊 Listen';
+  listen.onclick=()=>{ clearAuto(); stopAll(); playWord(it); };
+  const mic=makeMic();
+  $('#controls').append(listen,mic);
+  playWord(it);
+}
+async function playWord(it){
+  const t=playToken;
+  setHint('Listen…');
+  await sleep(80); if(t!==playToken) return;
+  await speak(it.text,{who:'traveller',onWord:highlight}); if(t!==playToken) return;
+  clearHighlight();
+  setHint(SR?'Your turn — tap the microphone and repeat.':'Listening unavailable in this browser.');
+}
+
+/* --- STEP 2: phrase (text hidden) --- */
+function renderPhrase(it){
+  const stage=$('#stage');
+  stage.innerHTML=`
+    <h2>Listen and say the phrase</h2>
+    <p class="sub">The text is hidden. Listen carefully, then repeat.</p>
+    <div class="tiles" id="tiles" style="min-height:3.4rem"></div>
+    <div id="phraseText" style="font-size:1.6rem;font-family:var(--display);color:var(--blue)" hidden></div>
+    <div class="controls" id="controls"></div>`;
+  // show tiles = blanks
+  const words=it.text.split(' ');
+  state.starts=words.map((w,ix)=>words.slice(0,ix).join(' ').length+(ix?1:0));
+  const tiles=$('#tiles'); tiles.innerHTML='';
+  words.forEach(w=>{
+    const b=document.createElement('button');
+    b.className='tile';
+    b.textContent='•'.repeat(Math.max(3,Math.min(8,w.replace(/[^\w']/g,'').length)));
+    b.setAttribute('aria-label','hidden word');
+    b.onclick=()=>{ revealPhrase(it); };
+    tiles.appendChild(b);
+  });
+  $('#controls').innerHTML='';
+  const listen=document.createElement('button'); listen.className='btn ghost'; listen.innerHTML='🔊 Listen';
+  listen.onclick=()=>{ clearAuto(); stopAll(); playPhrase(it); };
+  const mic=makeMic();
+  $('#controls').append(listen,mic);
+  $('#helpBtn').hidden=false;
+  $('#helpBtn').onclick=()=>revealPhrase(it);
+  playPhrase(it);
+}
+async function playPhrase(it){
+  const t=playToken;
+  setHint('Listen…');
+  await sleep(80); if(t!==playToken) return;
+  await speak(it.text,{who:'traveller',onWord:highlight}); if(t!==playToken) return;
+  clearHighlight();
+  setHint(SR?'Now say it — tap the microphone. Need help? Press “Help me”.':'Listening unavailable in this browser.');
+}
+function revealPhrase(it){
+  const words=it.text.split(' ');
+  const tiles=$('#tiles');
+  words.forEach((w,k)=>{ if(tiles.children[k]){ tiles.children[k].textContent=w; tiles.children[k].setAttribute('aria-label','word '+w);} });
+  const pt=$('#phraseText'); pt.hidden=false; pt.textContent=it.text;
+  $('#helpBtn').hidden=true;
+}
+
+/* --- STEP 3: role-play --- */
+function renderRoleplay(it){
+  const stage=$('#stage');
+  stage.innerHTML=`
+    <h2>You are the traveller</h2>
+    <p class="sub">The agent speaks first. Answer out loud — the answer is hidden unless you need help.</p>
+    <div class="chat" id="chat"></div>
+    <div class="tiles" id="tiles" style="min-height:3.4rem"></div>
+    <div id="answerText" style="font-size:1.5rem;font-family:var(--display);color:var(--blue)" hidden></div>
+    <div class="controls" id="controls"></div>`;
+  const chat=$('#chat'); chat.innerHTML='';
+  if(it.prompt){
+    const b=document.createElement('span');
+    b.className='bubble agent';
+    b.innerHTML='<b>Agent</b>';
+    b.append(it.prompt);
+    chat.appendChild(b);
+  }
+  const c=document.createElement('span');
+  c.className='bubble traveller';
+  c.innerHTML='<b>You</b>';
+  c.append('…');
+  chat.appendChild(c);
+
+  // hidden answer tiles
+  const words=it.text.split(' ');
+  state.starts=words.map((w,ix)=>words.slice(0,ix).join(' ').length+(ix?1:0));
+  const tiles=$('#tiles'); tiles.innerHTML='';
+  words.forEach(w=>{
+    const b=document.createElement('button');
+    b.className='tile';
+    b.textContent='•'.repeat(Math.max(3,Math.min(8,w.replace(/[^\w']/g,'').length)));
+    b.setAttribute('aria-label','hidden word');
+    b.onclick=()=>revealRoleplay(it);
+    tiles.appendChild(b);
+  });
+  $('#controls').innerHTML='';
+  const mic=makeMic();
+  const listen=document.createElement('button'); listen.className='btn ghost'; listen.innerHTML='🔊 Hear agent again';
+  listen.onclick=()=>{ if(it.prompt){ clearAuto(); stopAll(); speak(it.prompt,{who:'agent'}); } };
+  $('#controls').append(listen,mic);
+  $('#helpBtn').hidden=false;
+  $('#helpBtn').onclick=()=>revealRoleplay(it);
+  // auto-play the agent's line
+  (async()=>{ const t=playToken; setHint('Listen to the agent…'); await sleep(80); if(t!==playToken) return;
+    if(it.prompt){ await speak(it.prompt,{who:'agent'}); if(t!==playToken) return; }
+    setHint(SR?'Your turn — answer the agent.':'Listening unavailable in this browser.'); })();
+}
+function revealRoleplay(it){
+  const words=it.text.split(' ');
+  const tiles=$('#tiles');
+  words.forEach((w,k)=>{ if(tiles.children[k]){ tiles.children[k].textContent=w; } });
+  const at=$('#answerText'); at.hidden=false; at.textContent=it.text;
+  $('#helpBtn').hidden=true;
+}
+
+/* --- shared mic button --- */
+function makeMic(){
+  const btn=document.createElement('button');
+  btn.className='mic'; btn.id='micBtn'; btn.setAttribute('aria-label','Start speaking');
+  btn.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span id="micLabel">Speak</span>`;
+  btn.onclick=()=>{ if(recording&&rec){ try{rec.stop();}catch(e){} } else startRec(); };
+  return btn;
+}
+function setRecUI(on){
+  recording=on;
+  const m=$('#micBtn'); if(!m) return;
+  m.classList.toggle('rec',on);
+  const l=$('#micLabel'); if(l) l.textContent=on?'Stop':'Speak';
+  m.setAttribute('aria-label',on?'Stop speaking':'Start speaking');
+}
+
+/* ---------- listening ---------- */
+function stopAll(){
+  stopSpeaking();
+  clearTimeout(recTimer);
+  if(rec){
+    rec.onend=rec.onerror=rec.onresult=rec.onstart=null;
+    try{ rec.abort(); }catch(e){}
+    rec=null;
+  }
+  setRecUI(false);
+}
+function startRec(){
+  if(!SR) return;
+  clearAuto(); stopSpeaking();
+  const it=state.items[state.i];
+  $('#feedback').hidden=true;
+  document.querySelectorAll('#tiles .tile').forEach(t=>t.classList.remove('good','close','bad'));
+  const r=new SR();
+  r.lang='en-US'; r.interimResults=true; r.maxAlternatives=5; r.continuous=false;
+  let finalAlts=null, interim='', failed=false;
+  r.onstart=()=>{ setRecUI(true); setHint('Listening… say it!'); $('#heard').hidden=true; };
+  r.onresult=e=>{
+    for(let k=e.resultIndex;k<e.results.length;k++){
+      const res=e.results[k];
+      const alts=Array.from(res).map(a=>({transcript:a.transcript,confidence:a.confidence}));
+      interim=alts[0].transcript;
+      $('#heard').hidden=false; $('#heard').textContent='“'+interim+'”';
+      if(res.isFinal) finalAlts=alts;
+    }
+  };
+  r.onerror=e=>{
+    failed=true;
+    if(e.error==='no-speech') setHint("I couldn't hear you. Tap the microphone and try again.");
+    else if(e.error==='not-allowed'||e.error==='service-not-allowed') setHint('The microphone is blocked. Allow it in your browser settings, then try again.');
+    else if(e.error==='audio-capture') setHint("I can't find a microphone. Plug one in and try again.");
+    else if(e.error==='network') setHint('Speech checking needs the internet. Check your connection.');
+    else if(e.error!=='aborted') setHint('Something went wrong. Tap the microphone to try again.');
+  };
+  r.onend=()=>{
+    clearTimeout(recTimer); setRecUI(false); rec=null;
+    if(failed) return;
+    const alts=finalAlts||(interim?[{transcript:interim,confidence:0}]:null);
+    if(!alts){ setHint("I couldn't hear you. Tap the microphone and try again."); return; }
+    setHint('Checking…');
+    showResult(evaluate(it.text,alts));
+  };
+  rec=r;
+  try{ r.start(); }catch(err){ setHint('Tap the microphone to try again.'); return; }
+  recTimer=setTimeout(()=>{ try{ r.stop(); }catch(e){} },12000);
+}
+
+/* ---------- result panel ---------- */
+function showResult(r){
+  const it=state.items[state.i];
+  state.scores[it.key]=Math.max(state.scores[it.key]||0,r.score);
+  document.querySelectorAll('#tiles .tile').forEach((t,k)=>{ if(r.tiles[k]) t.classList.add(r.tiles[k]); });
+  $('#heard').hidden=false; $('#heard').textContent='You said: “'+r.transcript+'”';
+  const fb=$('#feedback'); fb.hidden=false;
+  $('#cupWrap').innerHTML=cupHTML(); setCup($('#cupWrap'),r.score);
+  $('#scoreNum').textContent=r.score;
+  const n=starCount(r.score);
+  $('#scoreStars').innerHTML=starsHTML(n);
+  $('#scoreStars').setAttribute('aria-label',n+' out of 3 stars');
+  $('#msg').textContent = r.score>=90?'Perfect! You sound great!' : r.score>=70?'Great job!' : r.score>=40?'Good try! Listen again and have another go.' : "Let's listen again and try once more.";
+  setHint('');
+  // tips
+  const tips=$('#tips'); tips.innerHTML='';
+  const bad=r.words.map((w,k)=>({w,st:r.tiles[k]})).filter(x=>x.st!=='good').slice(0,4);
+  if(bad.length){
+    const lab=document.createElement('span'); lab.textContent='Hear these words again:'; tips.appendChild(lab);
+    bad.forEach(x=>{
+      const clean=x.w.replace(/[^\w'$. ]/g,'');
+      const b=document.createElement('button'); b.textContent=clean;
+      b.onclick=()=>{ clearAuto(); stopAll(); sleep(60).then(()=>speak(clean,{slow:true})); };
+      tips.appendChild(b);
+    });
+    tips.hidden=false;
+  } else tips.hidden=true;
+  const last=state.i>=state.items.length-1;
+  const nextBtn=$('#nextBtn'); nextBtn.textContent=last?'See my score':'Next';
+  const dot=$('#dots').children[state.i]; if(dot) dot.className='now';
+  if(r.score>=PASS && $('#autoNext').checked){
+    nextBtn.classList.add('counting');
+    autoTimer=setTimeout(goNext,AUTO_DELAY);
+  }
+  nextBtn.focus({preventScroll:true});
+  fb.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'nearest'});
+}
+function goNext(){
+  clearAuto();
+  if(state.i<state.items.length-1){ state.i++; renderItem(); }
+  else showResults();
+}
+
+/* ---------- results ---------- */
+function showResults(){
+  stopAll();
+  const scored=state.items.filter(it=>typeof state.scores[it.key]==='number');
+  const avg=scored.length?Math.round(scored.reduce((a,it)=>a+state.scores[it.key],0)/scored.length):0;
+  $('#cupWrap2').innerHTML=cupHTML(); setCup($('#cupWrap2'),avg);
+  $('#avgNum').textContent=avg;
+  $('#avgStars').innerHTML=starsHTML(starCount(avg));
+  const list=$('#list'); list.innerHTML='';
+  state.items.forEach(it=>{
+    const sc=state.scores[it.key];
+    const li=document.createElement('li');
+    li.innerHTML='<span aria-hidden="true"></span><span class="txt"></span><span class="sc"></span><button class="mini" aria-label="Hear this"></button>';
+    const tag = it.type==='vocab'?'📘':it.type==='phrase'?'💬':'🧳';
+    li.children[0].textContent=tag;
+    li.children[1].textContent=it.text;
+    li.children[2].innerHTML = typeof sc==='number' ? starsHTML(starCount(sc))+'<span>'+sc+'</span>' : '<span>skipped</span>';
+    li.children[3].innerHTML='🔊';
+    li.children[3].onclick=()=>{ stopSpeaking(); sleep(60).then(()=>speak(it.text,{who:'traveller'})); };
+    list.appendChild(li);
+  });
+  const weak=state.items.filter(it=>!(state.scores[it.key]>=PASS));
+  $('#tricky').hidden=!weak.length;
+  $('#tricky').textContent=`Practise tricky items (${weak.length})`;
+  show('results');
+}
+
+/* ---------- buttons ---------- */
+$('#startBtn').onclick=()=>startLesson();
+$('#menuBtn').onclick=()=>{ clearAuto(); stopAll(); show('start'); };
+$('#retryBtn').onclick=()=>{ clearAuto(); $('#feedback').hidden=true; startRec(); };
+$('#nextBtn').onclick=goNext;
+$('#skipBtn').onclick=()=>{ clearAuto(); const it=state.items[state.i]; if(state.scores[it.key]===undefined) state.scores[it.key]=null; goNext(); };
+$('#slowBtn').onclick=e=>{ state.slow=!state.slow; e.currentTarget.setAttribute('aria-pressed',state.slow); };
+$('#again').onclick=()=>startLesson();
+$('#tricky').onclick=()=>{
+  const weak=state.items.filter(it=>!(state.scores[it.key]>=PASS));
+  if(!weak.length) return;
+  startLesson(weak);
+};
+window.addEventListener('pagehide',stopAll);
+
+if(!SR) $('#noSR').hidden=false;
+show('start');
+</script>
+</body>
+</html>
